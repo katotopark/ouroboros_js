@@ -36,6 +36,7 @@ input[type=range]::-webkit-slider-thumb {
   background: white;
   border: 0px solid black;
   border-radius: 14px;
+  padding: .5em;
   font-size: .5em;
   font-family: 'InputMonoCompressed-Medium';
 }

@@ -1,8 +1,8 @@
-let boArray;
+let boArray, population;
 
 class BoroSystem {
-  constructor(count) {
-    boArray = new Array(count);
+  constructor(population) {
+    boArray = new Array(population);
     for(var i = 0; i < boArray.length; i++){
   		boArray[i] = new Boro();
   	}
@@ -30,5 +30,21 @@ class BoroSystem {
   	    }
   		}
     });
+  }
+
+  updatePopulation(newPopulation) {
+    let tempBoro = newPopulation - population;
+
+    if(tempBoro > 0) {
+      for(var i = 0; i < tempBoro; i++){
+        let bornBoro = new Boro();
+        boArray.push(bornBoro);
+      }
+    } else {
+      for(var i = boArray.length - newPopulation; i >= 0; i--) {
+        let shortBoArray = shorten(boArray);
+      }
+    }
+    population = newPopulation;
   }
 }

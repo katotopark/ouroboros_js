@@ -7,12 +7,12 @@ class OuroSystem {
     ouArray.push(ouro);
   }
 
-  runOuros(prtgnst, prprty) {
+  runOuros(protagonist, prprty) {
     const ouArrMap = ouArray.map((ou) => {
   		ou.display();
   		ou.checkEdges();
 
-  		if(prtgnst && mouseIsPressed) {
+  		if(protagonist) {
   			const mouse = createVector(pmouseX, pmouseY);
   			ou.applyForce(ou.seek(mouse));
   		} else {
@@ -22,6 +22,14 @@ class OuroSystem {
   	});
   }
   popOuros() {
-
+    if(popUp && ouArray.length <= 3) {
+      const ouArrMap = ouArray.map((ou) => {
+        if(ou.eatenBoros > 0 && ou.eatenBoros % 10 == 0) {
+          console.log('popping');
+          ouArray.push(new Ouro());
+          ou.eatenBoros = 1;
+        }
+      });
+    }
   }
 }

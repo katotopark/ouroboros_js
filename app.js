@@ -1,6 +1,8 @@
 const tolValScale = 15;
 let marginX, marginY;
 let env, ouSys, boSys;
+let prtgnst = false;
+		popUp 	= false ;
 
 function getRandomFloat(min, max) {
 	return Math.random() * (max - min) + min;
@@ -20,8 +22,15 @@ function setup() {
 
 	env = new Environment();
 	ouSys = new OuroSystem();
-	boSys = new BoroSystem(60);
+	boSys = new BoroSystem(20);
 
+	prtgnstButton.mouseClicked(() => {
+		prtgnst = true;
+	});
+
+	popUpButton.mouseClicked(() => {
+		popUp = true;
+	});
 }
 
 function draw() {
@@ -35,10 +44,11 @@ function draw() {
 	env.area(marginX, marginY);
 	env.grid(marginX, marginY, 20);
 
-	ouSys.runOuros(true, propVal);
+	ouSys.runOuros(prtgnst, propVal);
+	ouSys.popOuros();
 	boSys.runBoros(ouro, 5, ambitionVal, obedienceVal, 1);
 	boSys.removeBoros(ouro);
-
+	boSys.updatePopulation(populationVal);
 }
 
 function windowResized() {
@@ -100,7 +110,7 @@ Controls.prototype.interact = function() {
 	// UI (ouro): pop-up
 
 	// UI (boro): population
-	populationVal = map(populationSlider.value(), 0, 100, 0, 100);
+	populationVal = map(populationSlider.value(), 0, 100, 20, 200);
 	text("POPULATION", 100, 210);
 	// UI (boro): obedience
 	obedienceVal = map(obedienceSlider.value(), 0, 100, 50, 1);
